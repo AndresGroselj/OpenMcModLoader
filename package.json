@@ -1,5 +1,5 @@
 {
-  "name": "chainatown_installer",
+  "name": "open-mc-mod-loader",
   "version": "1.0.0",
   "description": "Instalador de mods para el servidor \"chainaTown\"",
   "main": "Main.js",
@@ -9,7 +9,7 @@
     "make": "electron-forge make"
   },
   "author": "anrag",
-  "license": "ISC",
+  "license": "GPL2",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.64",
     "@electron-forge/maker-deb": "^6.0.0-beta.64",

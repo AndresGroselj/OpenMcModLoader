@@ -11,7 +11,6 @@ const paths = {
 
 const WINDOW_API = {
         install: (path) => ipcRenderer.send('install', path),
-        redirectToTwitch: () => ipcRenderer.send('redirectToTwitch'),
         searchDir: (path) => ipcRenderer.invoke('searchDir', path)
 }
 

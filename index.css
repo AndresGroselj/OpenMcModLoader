@@ -37,21 +37,6 @@ body {
     width: 50%;
 }
 
-#twitchLink{
-    z-index: 2;
-    font-size: large;
-    position: fixed;
-    bottom: 0;
-
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-
-    background-color: rgba(0, 255, 255, 0);
-    height: 32px;
-    width: 220px;
-}
-
 #twitchLink:hover{
     cursor: pointer;
 }

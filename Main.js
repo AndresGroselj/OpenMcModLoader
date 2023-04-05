@@ -66,11 +66,6 @@ ipcMain.handle("searchDir", async (event, currentPath) => {
 	return [result.canceled, result.filePaths]
 })
 
-ipcMain.on("redirectToTwitch", (event, args) => {
-	console.log("redirecting to twitch")
-	shell.openExternal('https://www.twitch.tv/chainavt')
-})
-
 function copyMods(installPath){
 	var modsDestinyPath = path.join(installPath, "mods")
 	var mods = getFileNames(paths.modsSource)
