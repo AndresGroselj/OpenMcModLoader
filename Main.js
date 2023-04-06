@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const path = require("path")
 const fs = require('fs-extra');
+const { google } = require('googleapis')
+const drive = google.drive({ version: "v3", auth: "AIzaSyA13vMIhtNRKkPJnICBejqpo5cdqNJf2vY" })
 
 const paths = {
 	modsSource: path.join(__dirname, "minecraftFiles/mods"),
@@ -106,3 +108,21 @@ function getFileNames(filePath){
 function copy(file, destination){
 	fs.copy(file, path.join(destination, path.basename(file)), (err) => {if (err) throw err;});
 }
+
+ipcMain.handle("getPackList", async (event) => {
+	console.log("fetching list of mod packs");
+	let fconf = {};
+    fconf.maxResults = 10;
+    fconf.orderBy = "createdTime";
+    fconf.q = `'${"1LCoCV4HuCVPMWTTEq7SHqmzFT1FLcJX6"}' in parents`;
+
+    return new Promise((resolve, reject) => {
+      drive.files.list(fconf, function (error, response) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response.data.files);
+        }
+      });
+    });
+})
