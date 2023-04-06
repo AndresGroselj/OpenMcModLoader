@@ -2,6 +2,7 @@ const input = document.querySelector("#pathSelector input");
 const btn_install = document.getElementById("btn-install");
 const btn_buscar = document.getElementById("btn-searchDir");
 const dd_packList = document.getElementById("dd-packList");
+const loading = document.getElementById("loading");
 btn_install.addEventListener("click", install)
 btn_buscar.addEventListener("click", searchDir)
 
@@ -21,6 +22,7 @@ async function searchDir(){
 }
 
 async function getPackList(){
+    displayLoading(true);
     var files = await window.api.getPackList();
     files.forEach(file => {
         console.log(file)
@@ -28,6 +30,15 @@ async function getPackList(){
             dd_packList.innerHTML += `<option value="${file.id}">${file.name}</option>`;
         }
     });
+    displayLoading(false);
+}
+
+function displayLoading(display){
+    if (display){
+        loading.classList.remove("d-none");
+    } else {
+        loading.classList.add("d-none");
+    }
 }
 
 getPackList();
