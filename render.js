@@ -26,8 +26,9 @@ async function getPackList(){
     var files = await window.api.getPackList();
     files.forEach(file => {
         console.log(file)
-        if (file.mimeType == "application/vnd.google-apps.folder"){
-            dd_packList.innerHTML += `<option value="${file.id}">${file.name}</option>`;
+        if (file.mimeType == "application/zip"){
+            let name = file.name.replace(".zip", "");
+            dd_packList.innerHTML += `<option value="${file.id}">${name}</option>`;
         }
     });
     displayLoading(false);
