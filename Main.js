@@ -1,8 +1,9 @@
+const { google } = require('googleapis')
+const drive = google.drive({ version: "v3", auth: "AIzaSyA13vMIhtNRKkPJnICBejqpo5cdqNJf2vY" })
 const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const path = require("path")
 const fs = require('fs-extra');
-const { google } = require('googleapis')
-const drive = google.drive({ version: "v3", auth: "AIzaSyA13vMIhtNRKkPJnICBejqpo5cdqNJf2vY" })
+const os = require("os");
 
 const paths = {
 	modsSource: path.join(__dirname, "minecraftFiles/mods"),
@@ -126,3 +127,35 @@ ipcMain.handle("getPackList", async (event) => {
       });
     });
 })
+
+async function downloadFile(fileId){
+    let fconf = {};
+    fconf.fileId = fileId;
+    fconf.alt = "media";
+
+
+    return new Promise((resolve, reject) => {
+      drive.files.get(
+        fconf,
+        {responseType: 'stream'}, 
+        function (error, response) {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
+          }
+        }
+      );
+    });
+}
+
+async function saveFileStream(stream, name){
+  const dest = fs.createWriteStream(path.join(os.tmpdir(), name));
+  stream.data.on('error', err => {
+    done(err);
+  }).on('end', ()=>{
+    mkdir
+  })
+  .pipe(dest);
+
+}
