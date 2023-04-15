@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const Downloader = require("./Downloader")
 
 class Installer{
 	static copyMods(installPath){

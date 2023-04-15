@@ -22,7 +22,7 @@ const createWindow = () => {
 		}
 	})
 
-	win.loadFile('index.html')
+	win.loadFile('./front/index.html')
 	if (!app.isPackaged) win.webContents.openDevTools()
 }
 

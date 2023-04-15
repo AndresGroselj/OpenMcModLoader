@@ -6,17 +6,22 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Open mod loader</title>
     <script defer src="render.js"></script>
+    <script defer src="ProgressChecker.js"></script>
     
     <link rel="stylesheet" href="index.css">
 
   </head>
   <body>
-    <img id="backgroundImage" src="./static/background.png" alt="" class="antiSelector">
+    <img id="backgroundImage" src="../static/background.png" alt="" class="antiSelector">
     <div id="loading" class="d-none"><div></div></div>
 
     <div id="pathSelector">
       <input/>
       <button id="btn-searchDir">Buscar</button>
+    </div>
+    <div>
+      <label for="progress-bar" id="progress-label"></label>
+      <progress id="progress-bar" max="100" value="70"></progress>
     </div>
 
     <div>

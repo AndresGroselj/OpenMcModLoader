@@ -13,6 +13,7 @@ const WINDOW_API = {
         install: (path) => ipcRenderer.send('install', path),
         searchDir: (path) => ipcRenderer.invoke('searchDir', path),
         getPackList: () => ipcRenderer.invoke('getPackList'),
+        getProgress: () => ipcRenderer.invoke('getProgress'),
 }
 
 contextBridge.exposeInMainWorld('api', WINDOW_API)
