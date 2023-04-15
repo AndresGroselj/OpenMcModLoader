@@ -10,7 +10,7 @@ const paths = {
 }
 
 const WINDOW_API = {
-        install: (path) => ipcRenderer.send('install', path),
+        install: (path, packid) => ipcRenderer.send('install', path, packid),
         searchDir: (path) => ipcRenderer.invoke('searchDir', path),
         getPackList: () => ipcRenderer.invoke('getPackList'),
         getProgress: () => ipcRenderer.invoke('getProgress'),

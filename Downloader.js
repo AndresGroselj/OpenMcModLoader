@@ -1,6 +1,8 @@
 const { google } = require('googleapis')
 const drive = google.drive({ version: "v3", auth: "AIzaSyA13vMIhtNRKkPJnICBejqpo5cdqNJf2vY" })
+const path = require("path")
 const os = require("os");
+const fs = require('fs-extra');
 
 class Downloader {
   static async listDirectory(directoryId){
@@ -42,11 +44,14 @@ class Downloader {
   }
 
   static async saveFileStream(stream, name){
-    const dest = fs.createWriteStream(path.join(os.tmpdir(), name));
+    const p = path.join(os.tmpdir(), name);
+    console.log("saving!!! ######################")
+    console.log(p)
+    const dest = fs.createWriteStream(p);
     stream.data.on('error', err => {
       done(err);
     }).on('end', ()=>{
-      mkdir
+      
     })
     .pipe(dest);
 

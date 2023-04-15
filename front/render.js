@@ -1,4 +1,4 @@
-const input = document.querySelector("#pathSelector input");
+const input_path = document.querySelector("#pathSelector input");
 const btn_install = document.getElementById("btn-install");
 const btn_buscar = document.getElementById("btn-searchDir");
 const dd_packList = document.getElementById("dd-packList");
@@ -8,16 +8,16 @@ btn_buscar.addEventListener("click", searchDir)
 
 function install(){
     console.log("installing ... ")
-    window.api.install(input.value)
+    window.api.install(input_path.value, dd_packList.value)
 }
 
 async function searchDir(){
     console.log("buscando")
-    result = await window.api.searchDir(input.value)
+    result = await window.api.searchDir(input_path.value)
     canceled = result[0]
     path = result[1]
     if (!canceled){
-        input.value = path
+        input_path.value = path
     }
 }
 

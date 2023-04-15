@@ -2,6 +2,10 @@ const fs = require('fs-extra');
 const Downloader = require("./Downloader")
 
 class Installer{
+	static async download(zipid){
+		await Downloader.saveFileStream(await Downloader.downloadFile(zipid), "pack.zip")
+	}
+
 	static copyMods(installPath){
 		var modsDestinyPath = path.join(installPath, "mods")
 		var mods = getFileNames(paths.modsSource)
