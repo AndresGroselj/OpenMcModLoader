@@ -3,7 +3,7 @@ const Downloader = require("./Downloader")
 
 class Installer{
 	static async download(zipid){
-		await Downloader.saveFileStream(await Downloader.downloadFile(zipid), "pack.zip")
+		await Downloader.downloadFile(zipid, "pack.zip")
 	}
 
 	static copyMods(installPath){

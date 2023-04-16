@@ -3,17 +3,14 @@ const Downloader = require("./Downloader")
 const Installer = require("./Installer")
 const Progress = require("./Progress")
 
-ipcMain.on("install", (event, installPath, packid) => {
+ipcMain.on("install", async (event, installPath, packid) => {
 	console.log(`installing mods in ${installPath}` )
 
-	//region: test
 	progress = Progress.getInstance();
-	progress.value = progress.value + 1;
-	progress.max = 20;
-	//endregion: test
+	progress.value = 0;
+	progress.max = 24600318; //TODO: do this automatically
 
-	Installer.download(packid);
-
+	await Installer.download(packid);
 	//Installer.copyMods(installPath)
 	//Installer.copyVersion(installPath)
 	//Installer.installProfile(installPath)

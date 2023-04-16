@@ -78,3 +78,7 @@ body {
 .d-none{
     display: none;
 }
+
+#progress-label{
+    color: white;
+}

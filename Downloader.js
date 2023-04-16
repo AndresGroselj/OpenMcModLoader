@@ -24,47 +24,39 @@ class Downloader {
   }
 
   static async downloadFile(fileId, name){
-      let fconf = {};
-      fconf.fileId = fileId;
-      fconf.alt = "media";
+    const p = path.join(os.tmpdir(), name);
+    const dest = fs.createWriteStream(p);
 
+    Progress.getInstance().status = "Starting download";
 
-      return new Promise((resolve, reject) => {
-        drive.files.get(
-          fconf,
-          {responseType: 'stream'}, 
-          function (error, response) {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(response);
-            }
+    return new Promise((resolve, reject) => {
+      drive.files.get(
+        {
+          fileId: fileId,
+          alt: 'media'
+        },
+        {responseType: "stream"}, 
+        (err, { data }) => {
+          if (err) {
+            reject(err);
+          } else {
+            data
+              .on('end', () => {
+                console.log('Download completed.');
+                resolve();
+              })
+              .on('error', err => reject(err))
+              .on('data', chunk => {
+                Progress.getInstance().status = "Downloading";
+                Progress.getInstance().value += chunk.length;
+              })
+              .pipe(dest);
+
+            ;
           }
-        );
-      });
-
-      const p = path.join(os.tmpdir(), name);
-      console.log("saving!!! ######################")
-      console.log(p)
-      const dest = fs.createWriteStream(p);
-
-      let progress = 0
-      dest.on('data', (chunk) => {
-        progress += chunk.length /// fileSize
-        console.log('progress', progress)
-      })
-
-      stream.data.on('error', err => {
-        done(err);
-      }).on('end', ()=>{
-        
-      })
-      .pipe(dest);
-  }
-
-  static async saveFileStream(stream, name){
-    
-
+        }
+      );
+    });
   }
 
   static async getFileSize(fileId){
